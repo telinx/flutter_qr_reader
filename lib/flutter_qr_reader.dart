@@ -31,6 +31,8 @@ class QrReaderView extends StatefulWidget {
   final bool torchEnabled;
   final double width;
   final double height;
+  final String supportTip;
+  final String permissionsTip;
 
   QrReaderView({
     Key key,
@@ -39,6 +41,8 @@ class QrReaderView extends StatefulWidget {
     this.callback,
     this.autoFocusIntervalInMs = 500,
     this.torchEnabled = false,
+    this.supportTip = "Don't support this OS",
+    this.permissionsTip = 'No permissions to access the camera',
   }) : super(key: key);
 
   @override
@@ -84,7 +88,7 @@ class _QrReaderViewState extends State<QrReaderView> {
         ].toSet(),
       );
     } else {
-      return Text('平台暂不支持');
+      return Text('${widget.supportTip}');
     }
   }
 

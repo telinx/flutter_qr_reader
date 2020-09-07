@@ -12,13 +12,19 @@ class QrcodeReaderView extends StatefulWidget {
   final double scanBoxRatio;
   final Color boxLineColor;
   final Widget helpWidget;
+  final String supportTip;
+  final String permissionsTip;
+  final String scanTip;
   QrcodeReaderView({
-                     Key key,
-                     @required this.onScan,
-                     this.headerWidget,
-                     this.boxLineColor = Colors.cyanAccent,
-                     this.helpWidget,
-                     this.scanBoxRatio = 0.85,
+    Key key,
+    @required this.onScan,
+    this.headerWidget,
+    this.boxLineColor = Colors.cyanAccent,
+    this.helpWidget,
+    this.scanBoxRatio = 0.85,
+    this.supportTip = "Don't support this OS",
+    this.permissionsTip = 'No permissions to access the camera',
+    this.scanTip = 'please place the code inside the frame',
                    }) : super(key: key);
 
   @override
@@ -151,6 +157,7 @@ class QrcodeReaderViewState extends State<QrcodeReaderView>
                 width: constraints.maxWidth,
                 height: constraints.maxHeight,
                 callback: _onCreateController,
+                supportTip: widget.supportTip,
               ),
             ),
             if (widget.headerWidget != null) widget.headerWidget,
@@ -179,7 +186,7 @@ class QrcodeReaderViewState extends State<QrcodeReaderView>
                 alignment: Alignment.center,
                 child: DefaultTextStyle(
                   style: TextStyle(color: Colors.white),
-                  child: widget.helpWidget ?? Text("请将二维码置于方框中"),
+                  child: widget.helpWidget ?? Text("${widget.scanTip}"),
                 ),
               ),
             ),
@@ -207,22 +214,7 @@ class QrcodeReaderViewState extends State<QrcodeReaderView>
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
-                  GestureDetector(
-                    behavior: HitTestBehavior.translucent,
-                    onTap: _scanImage,
-                    child: Container(
-                      width: 45,
-                      height: 45,
-                      alignment: Alignment.center,
-                      child: Image.asset(
-                        "assets/tool_img.png",
-                        package: "flutter_qr_reader",
-                        width: 25,
-                        height: 25,
-                        color: Colors.white54,
-                      ),
-                    ),
-                  ),
+                  SizedBox(width: 45, height: 45),
                   Container(
                     width: 80,
                     height: 80,
@@ -239,7 +231,22 @@ class QrcodeReaderViewState extends State<QrcodeReaderView>
                       color: Colors.white54,
                     ),
                   ),
-                  SizedBox(width: 45, height: 45),
+                  GestureDetector(
+                    behavior: HitTestBehavior.translucent,
+                    onTap: _scanImage,
+                    child: Container(
+                      width: 45,
+                      height: 45,
+                      alignment: Alignment.center,
+                      child: Image.asset(
+                        "assets/tool_img.png",
+                        package: "flutter_qr_reader",
+                        width: 25,
+                        height: 25,
+                        color: Colors.white54,
+                      ),
+                    ),
+                  ),
                 ],
               ),
             )

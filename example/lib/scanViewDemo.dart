@@ -26,6 +26,7 @@ class _ScanViewDemoState extends State<ScanViewDemo> {
           backgroundColor: Colors.transparent,
           elevation: 0.0,
         ),
+        scanTip: 'asdasdasdasdaads',
       ),
     );
   }

@@ -186,7 +186,7 @@ class QrcodeReaderViewState extends State<QrcodeReaderView>
                 alignment: Alignment.center,
                 child: DefaultTextStyle(
                   style: TextStyle(color: Colors.white),
-                  child: widget.helpWidget ?? Text("${widget.scanTip}"),
+                  child: widget.helpWidget ?? Text("${widget.scanTip}", textAlign: TextAlign.center,),
                 ),
               ),
             ),
